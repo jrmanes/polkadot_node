@@ -1,0 +1,36 @@
+---
+- hosts: localhost
+  become: true
+  gather_facts: yes
+  tasks:
+    - name: Import vars file
+      include_vars: "vars.yaml"
+      
+    - name: Install required packages
+      apt:
+        name: "{{ item }}"
+        state: present
+        update_cache: yes
+      with_items:
+        - ntp
+
+    - name: Download the binary - polkadot
+      get_url:
+        url: https://github.com/paritytech/polkadot/releases/download/{{ polkadot.version }}/polkadot
+        dest: "{{ polkadot.node_binary_path }}"
+        mode: '0755'
+
+    - name: Template a file to {{ node_system_path }}
+      template:
+        src: templates/node.service.j2
+        dest: "{{ polkadot.node_system_path }}"
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Systemd | Restart polkadot service
+      systemd:
+        name: polkadot
+        state: restarted
+        enabled: yes
+        daemon_reload: yes

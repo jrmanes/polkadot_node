@@ -1,0 +1,14 @@
+[Unit]
+Description=Polkadot Systemd Service
+
+[Service]
+Restart=always
+RestartSec=90
+User={{ polkadot.node_user }}
+Group={{ polkadot.node_user }}
+MemoryHigh={{ polkadot.node_memory_high }}
+MemoryMax={{ polkadot.node_memory_max }}
+ExecStart={{ polkadot.node_binary_path }}
+
+[Install]
+WantedBy=multi-user.target

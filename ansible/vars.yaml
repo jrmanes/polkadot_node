@@ -1,0 +1,7 @@
+polkadot:
+  version: v0.9.39-1
+  node_user: root # Change this to non-root user
+  node_binary_path: /usr/bin/polkadot
+  node_system_path: /etc/systemd/system/polkadot.service
+  node_memory_high: 3096M
+  node_memory_max: 30192M
