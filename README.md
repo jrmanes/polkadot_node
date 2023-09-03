@@ -66,4 +66,16 @@ make destroy_auto
 
 ---
 
+## TODOs
+
+- [ ] Automatic Updates
+  - Generate the dynamic inventory with Terraform to allow Ansible access to the instances
+  - Keep the private keys, and use them from Ansible
+  - Update the `ansible/vars.yaml` the `polkadot.version` variable to the latest version.
+  - Run the Ansible command to update the binary to all the instances defined in the inventory.
+- [ ] Update the user who runs the binary (non-root)
+- [ ] Split the file system in different EBS (volumes), to have inmutable infrastructure.
+
+---
+
 Jose Ramon Mañes
